@@ -6,11 +6,10 @@ const cors = require('cors');
 
 const postsController = require('./src/posts/PostsController');
 const reactionsController = require('./src/reactions/ReactionsController');
+const registerController = require('./src/register/RegisterController');
+const loginController = require('./src/login/LoginController');
 
-const Article = require('./src/users/User');
-const Posts = require('./src/posts/Posts');
-
-app.set(express.static('public'));
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors({
@@ -27,6 +26,9 @@ connection
 
 app.use('/', postsController);
 app.use('/', reactionsController);
+app.use('/register', registerController);
+app.use('/', loginController);
+
 
 app.listen(8989, () => {
     console.log('Servidor está rodando!')

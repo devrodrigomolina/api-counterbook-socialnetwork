@@ -3,8 +3,6 @@ const router = express.Router();
 const Posts = require('./Posts');
 const slugify = require('slugify');
 
-router.use(express.json());
-
 router.post('/posts/new', (req, res) => {
     const statusText = req.body.status;
 

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const connection = require('../../database/connection');
-const User = require('../users/User');
+const User = require('../register/Register');
 const Post = require('../posts/Posts');
 
 const Reaction = connection.define('reactions', {
