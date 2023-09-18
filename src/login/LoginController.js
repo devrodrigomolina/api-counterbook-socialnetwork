@@ -3,16 +3,17 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const Login = require("./Login");
 const User = require("../register/Register");
+const { createToken } = require('../middleware/jwtToken');
 
-router.post("/login", async (req, res) => {
+router.post("/new", async (req, res) => {
     const { user, password } = req.body;
     try {
         const userExsting = await User.findOne({
             where: {
-            username: user,
+                username: user,
             },
         });
-
+        
         if(!userExsting) {
             return res.send({ message: "Usuário não encontrado" });
         }
@@ -20,7 +21,8 @@ router.post("/login", async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, userExsting.password);
 
         if (isPasswordValid) {
-            res.send({ message: "Logado com sucesso!" });
+            const token = createToken({ id: userExsting.id, username: userExsting.username  })
+            res.send({ message: "Logado com sucesso!", token });
         } else {
             res.send({ message: "Senha inválida" });
         }

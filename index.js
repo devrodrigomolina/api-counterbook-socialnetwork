@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/connection');
 const cors = require('cors');
+const router = express.Router();
+const { verifyToken } = require('./src/middleware/jwtToken');
 
 const postsController = require('./src/posts/PostsController');
 const reactionsController = require('./src/reactions/ReactionsController');
@@ -24,10 +26,11 @@ connection
             console.log(error)
         })
 
-app.use('/', postsController);
-app.use('/', reactionsController);
 app.use('/register', registerController);
-app.use('/', loginController);
+app.use('/login', loginController);
+
+app.use('/', verifyToken, postsController);
+app.use('/', verifyToken, reactionsController);
 
 
 app.listen(8989, () => {
