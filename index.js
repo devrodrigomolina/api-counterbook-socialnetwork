@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -5,6 +6,7 @@ const connection = require('./database/connection');
 const cors = require('cors');
 const router = express.Router();
 const { verifyToken } = require('./src/middleware/jwtToken');
+
 
 const postsController = require('./src/posts/PostsController');
 const reactionsController = require('./src/reactions/ReactionsController');
@@ -33,6 +35,6 @@ app.use('/', verifyToken, postsController);
 app.use('/', verifyToken, reactionsController);
 
 
-app.listen(8989, () => {
-    console.log('Servidor está rodando!')
+app.listen(process.env.PORT, () => {
+    console.log(`Servidor está rodando na porta: ${process.env.PORT}`)
 })

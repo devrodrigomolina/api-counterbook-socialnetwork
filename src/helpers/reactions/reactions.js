@@ -1,4 +1,4 @@
-const Reaction = require('../../src/reactions/Reactions');
+const Reaction = require('../../reactions/Reactions');
 
 async function handleExistingReaction(existingReaction, newType) {
     if (existingReaction.type !== newType) {

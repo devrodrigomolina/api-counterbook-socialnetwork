@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('./Register');
-const cryptPassword = require('../../helpers/passwordCrypt/password');
+const cryptPassword = require('../helpers/passwordCrypt/password');
 
 router.post('/user/new', async (req, res) => {
     const { username, email, password, nome, genero, foto_de_perfil, data_de_nascimento, biografia } = req.body;

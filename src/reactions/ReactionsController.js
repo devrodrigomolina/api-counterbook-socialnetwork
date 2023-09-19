@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Reaction = require('./Reactions')
-const { handleExistingReaction, createNewReaction } = require('../../helpers/reactions/reactions')
+const { handleExistingReaction, createNewReaction } = require('../helpers/reactions/reactions')
 
 router.post('/reactions/new', async (req, res) => {
     const { type, postId, userId } = req.body;
